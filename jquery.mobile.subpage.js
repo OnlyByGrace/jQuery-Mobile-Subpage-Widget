@@ -106,7 +106,10 @@
                         if (npURL.indexOf(self.parentPageUrl + "&" + $.mobile.subPageUrlKey) !== 0) {
                             self.childPages().remove();
                             self.parentPage.remove();
-                        }
+                        } else {
+							e.preventDefault();
+							e.stopImmediatePropagation();
+						}
                     }
                 };
 
@@ -127,7 +130,7 @@
     // TJT: With jQM 1.2 we bind to pagecreate before any widgets start to enhance the page.
     //      See Subpage Widget Issue: #26
 
-    $(document).bind("pagecreate create", function (e) {
+    $(document).bind("pagebeforecreate create", function (e) {
         $.mobile.subpage.prototype.enhanceWithin(e.target);
     });
 })(jQuery);
